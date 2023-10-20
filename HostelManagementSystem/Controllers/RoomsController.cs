@@ -56,7 +56,7 @@ namespace HostelManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,roomNo,floor,type,capacity,vacancy")] Room room)
+        public async Task<IActionResult> Create([Bind("Id,roomNo,type,capacity,vacancy")] Room room)
         {
             //if (ModelState.IsValid)
             //{
@@ -89,7 +89,7 @@ namespace HostelManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,roomNo,floor,type,capacity,vacancy")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,roomNo,type,capacity,vacancy")] Room room)
         {
             if (id != room.Id)
             {
@@ -159,6 +159,26 @@ namespace HostelManagementSystem.Controllers
         private bool RoomExists(int id)
         {
           return (_context.rooms?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        // GET: Rooms/Details/5
+        public async Task<IActionResult> DisplayRoomies(int? id)
+        {
+            if (id == null || _context.rooms == null)
+            {
+                return NotFound();
+            }
+
+            IEnumerable<Student> students = await _context.rooms
+                                    .Where(room => room.Id == id) // Filter by the specified room id
+                                    .SelectMany(room => room.Students) // Select the students within the room
+                                    .ToListAsync();
+            if (students == null)
+            {
+                return NotFound();
+            }
+
+            return View(students);
         }
     }
 }

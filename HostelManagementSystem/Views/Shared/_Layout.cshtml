@@ -34,6 +34,13 @@
                                 <a class="nav-link text-light" id="register" asp-area="Identity" asp-page="/Account/Register">Students</a>
                             </li>
                         }
+                        @if(User.Identity.IsAuthenticated && !(User.IsInRole("Admin")))
+                        {
+                            <li class="nav-item">
+                                 @*@User.Identity.Name*@
+                                <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="Details">Profile</a>
+                            </li>
+                        }
 
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

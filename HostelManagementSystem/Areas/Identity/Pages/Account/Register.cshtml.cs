@@ -127,14 +127,6 @@ namespace HostelManagementSystem.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> roomList { get; set; }
 
-
-            [Required]
-            public int floor { get; set; }
-
-            [ValidateNever]
-          
-            public IEnumerable<SelectListItem> floorList { get; set; }
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -159,18 +151,13 @@ namespace HostelManagementSystem.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-         
-            List<int> fl = new List<int> { 0, 1, 2, 3 };
+                   
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             Input = new InputModel()
             {
-                floorList = fl.Select(i => new SelectListItem
-                {
-                    Text = i.ToString(),
-                    Value = i.ToString()
-                }),
-                roomList = _context.rooms.Where(x => x.floor == 3).Select(x => x.roomNo).Select(i => new SelectListItem
+                
+                roomList = _context.rooms.Where(y => y.vacancy > 0).Select(x => x.roomNo).Select(i => new SelectListItem
                 {
                     Text = i.ToString(),
                     Value = i.ToString()
@@ -199,10 +186,20 @@ namespace HostelManagementSystem.Areas.Identity.Pages.Account
 
                 user.ZipCode = Input.ZipCode;
                 user.roomId = _context.rooms.Where(x => x.roomNo == Input.room).Select(i => i.Id).ToList()[0];
+
+                
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    // vacancy updated....
+                    Room update_vacancy = _context.rooms.Where(x => x.roomNo == Input.room).ToList()[0];
+                    update_vacancy.vacancy--;
+                    _context.Update(update_vacancy);
+                    await _context.SaveChangesAsync();
+
                     // role based auth done // we added
                     await _userManager.AddToRoleAsync(user, Roles.Student.ToString());
 

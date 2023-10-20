@@ -85,14 +85,6 @@
                 <label asp-for="Input.ZipCode">ZipCode</label>
                 <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
             </div>
-
-
-            <div class="form-floating mb-3">
-                <select asp-for="Input.floor" asp-items="@Model.Input.floorList" class="form-select" aria-required="true">
-                    <option disabled selected>Select Floor</option>
-                </select>
-                <span asp-validation-for="Input.floor" class="text-danger"></span>
-            </div>
             
             <div class="form-floating mb-3">
                 <select asp-for="Input.room" asp-items="@Model.Input.roomList" class="form-select" aria-required="true" >

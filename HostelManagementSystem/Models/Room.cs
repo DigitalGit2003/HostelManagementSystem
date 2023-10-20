@@ -3,8 +3,7 @@
     public class Room
     {
         public int Id { get; set; }
-        public int roomNo { get; set; }
-        public int floor { get; set; }
+        public int roomNo { get; set; }        
         public string type { get; set; }
         public int capacity { get; set; }
         public int vacancy { get; set; }

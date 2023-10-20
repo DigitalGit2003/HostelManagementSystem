@@ -7,16 +7,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Add Room</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.roomNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.floor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.type)
@@ -34,10 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.roomNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.floor)
+                <a asp-action="DisplayRoomies" asp-route-id="@item.Id">@item.roomNo</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.type)
