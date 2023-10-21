@@ -7,7 +7,9 @@
 
 }
 
-<h1>Details of indivisual room</h1>
+<center>
+    <h1>Details of indivisual room</h1>
+</center>
 <table class="table">
     <thead>
         <tr>
@@ -44,9 +46,9 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    <a asp-action="Details" class="btn btn-secondary mx-3" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Edit" class="btn btn-primary mx-3"  asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" class="btn btn-danger mx-3"  asp-route-id="@item.Id">Delete</a>
+                    <a asp-controller="Students" asp-action="Edit" class="btn btn-primary mx-3"  asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Students" asp-action="Details" class="btn btn-secondary mx-3" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Students" asp-action="Delete" class="btn btn-danger mx-3" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

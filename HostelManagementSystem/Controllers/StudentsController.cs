@@ -18,7 +18,7 @@ namespace HostelManagementSystem.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Profile()
         {
             string user_email = User.Identity.Name;
             Room user_room = _context.rooms.Include(r => r.Students).FirstOrDefault(r => r.Students.Any(s => s.Email == user_email));
