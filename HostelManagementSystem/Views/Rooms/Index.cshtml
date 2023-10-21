@@ -4,10 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Add New Room</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+
+    <button id="addRoom" type="button"  class="btn btn-dark">
+        <a class="text-white text-decoration-none" asp-action="Create">Create New</a>
+    </button>
+
 </p>
 <table class="table">
     <thead>
@@ -30,8 +34,8 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                <a asp-action="DisplayRoomies" asp-route-id="@item.Id">@item.roomNo</a>
+            <td >
+                    <a class="btn btn-primary"  asp-action="DisplayRoomies" asp-route-id="@item.Id">@item.roomNo</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.type)
@@ -43,9 +47,9 @@
                 @Html.DisplayFor(modelItem => item.vacancy)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Details" class="btn btn-secondary mx-3" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Edit" class="btn btn-primary mx-3"  asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" class="btn btn-danger mx-3" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
