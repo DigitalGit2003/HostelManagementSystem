@@ -72,7 +72,7 @@ namespace HostelManagementSystem.Controllers
         }
 
 
-        // GET: Rooms/Edit/5
+        // GET: Student/Edit/5
         public async Task<IActionResult> Edit(string? id) /// id of student is string
         {
             if (id == null || _context.students == null)
@@ -88,7 +88,7 @@ namespace HostelManagementSystem.Controllers
             return View(student);
         }
 
-        // POST: Rooms/Edit/5
+        // POST: Student/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -100,17 +100,25 @@ namespace HostelManagementSystem.Controllers
                 return NotFound();
             }
 
+
+            Student stu = await _context.students.FirstOrDefaultAsync(x => x.Id == id);
+
+            Room room = _context.rooms.FirstOrDefault(x => x.Id == stu.roomId);
+
+            int roomNo = room.roomNo;
+
             //if (ModelState.IsValid)
             //{
-                try
-                {
-                    Student stu = await _context.students.FirstOrDefaultAsync(x => x.Id == id);
+            try
+                {   
                     stu.Name = student.Name;
                     stu.Phone = student.Phone;
                     stu.Status = student.Status;
                     stu.ZipCode = student.ZipCode;
                     _context.Update(stu);
                     await _context.SaveChangesAsync();
+
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,7 +131,7 @@ namespace HostelManagementSystem.Controllers
                     //    throw;
                     //}
                 }
-                return RedirectToAction(nameof(Index), "Rooms");
+                return RedirectToAction("DisplayRoomies", "Rooms", new {id = roomNo});
             //}
             return View(student);
         }
