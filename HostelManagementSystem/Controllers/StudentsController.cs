@@ -27,5 +27,49 @@ namespace HostelManagementSystem.Controllers
             return View(user_room);
         }
 
+        // GET: Rooms/Delete/5
+        public async Task<IActionResult> Delete(string? id)
+        {
+            if (id == null || _context.students == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.students
+                .FirstOrDefaultAsync(m => m.Id == id.ToString());
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
+        }
+
+        // POST: Rooms/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (_context.students == null)
+            {
+                return Problem("Entity set 'AppDbContext.students'  is null.");
+            }
+            var student = await _context.students.FindAsync(id);
+            if (student != null)
+            {
+                // ############ After Removing student, vacancy++ ##########################3
+                Room room = _context.rooms.FirstOrDefault(x => x.Id == student.roomId);
+                room.vacancy++;
+                _context.Update(room);
+                _context.SaveChanges();
+
+                // ############## Now, Delete student #############################
+                _context.students.Remove(student);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), "Rooms");
+        }
+
     }
 }

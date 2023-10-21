@@ -37,7 +37,6 @@
                         @if(User.Identity.IsAuthenticated && !(User.IsInRole("Admin")))
                         {
                             <li class="nav-item">
-                                 @*@User.Identity.Name*@
                                 <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="Profile">Profile</a>
                             </li>
                         }
