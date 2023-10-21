@@ -10,13 +10,14 @@
 <h1>Details of Student's Room</h1>
 
 <div>
-    <h4>Room</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+    <div class="col-3">
+
+        <dt class="">
             @Html.DisplayNameFor(model => model.roomNo)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="">
             @Html.DisplayFor(model => model.roomNo)
         </dd>
         
@@ -33,19 +34,31 @@
             @Html.DisplayFor(model => model.capacity)
         </dd>
 
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.vacancy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.vacancy)
+        </dd>
+
+    </div>
+        
+    <div class ="col-9">
 
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Students)
         </dt>
-        
-        <dd class="col-sm-10">
+
+
+        <hr />
+        <br />
+        <dd class="flex d-inline-flex col-sm-10">
             @try
             {
+               
                 foreach (var student in Model.Students!)
                 {
-                    <hr />
                     @Html.Partial("RoomMates", student)
-                    <hr />
                 }
             }
             catch (Exception e)
@@ -53,14 +66,8 @@
                 <h1>Error :(</h1>
             }
         </dd>
+    </div>
 
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.vacancy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.vacancy)
-        </dd>
     </dl>
 </div>
 
