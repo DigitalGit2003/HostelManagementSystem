@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HostelManagementSystem.Data;
 using HostelManagementSystem.Models;
-using HostelManagementSystem.ViewModels;
 
 namespace HostelManagementSystem.Controllers
 {
@@ -97,8 +96,8 @@ namespace HostelManagementSystem.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(room);
@@ -116,7 +115,7 @@ namespace HostelManagementSystem.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(room);
         }
 
