@@ -105,7 +105,7 @@ namespace HostelManagementSystem.Controllers
 
             Room room = _context.rooms.FirstOrDefault(x => x.Id == stu.roomId);
 
-            int roomNo = room.roomNo;
+            int roomId = room.Id;
 
             //if (ModelState.IsValid)
             //{
@@ -131,7 +131,7 @@ namespace HostelManagementSystem.Controllers
                     //    throw;
                     //}
                 }
-                return RedirectToAction("DisplayRoomies", "Rooms", new {id = roomNo});
+                return RedirectToAction("DisplayRoomies", "Rooms", new {id = roomId});
             //}
             return View(student);
         }

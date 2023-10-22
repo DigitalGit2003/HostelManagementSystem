@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HostelManagementSystem.Data;
 using HostelManagementSystem.Models;
+using System.Net;
 
 namespace HostelManagementSystem.Controllers
 {
@@ -22,9 +23,9 @@ namespace HostelManagementSystem.Controllers
         // GET: Rooms
         public async Task<IActionResult> Index()
         {
-              return _context.rooms != null ? 
-                          View(await _context.rooms.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.rooms'  is null.");
+            return _context.rooms != null ?
+                        View(await _context.rooms.ToListAsync()) :
+                        Problem("Entity set 'AppDbContext.rooms'  is null.");
         }
 
         // GET: Rooms/Details/5
@@ -60,10 +61,10 @@ namespace HostelManagementSystem.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                room.vacancy = room.capacity;
-                _context.Add(room);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            room.vacancy = room.capacity;
+            _context.Add(room);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             //}
             return View(room);
         }
@@ -89,7 +90,7 @@ namespace HostelManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,roomNo,type,capacity,vacancy")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,roomNo,type,capacity")] Room room)
         {
             if (id != room.Id)
             {
@@ -98,23 +99,54 @@ namespace HostelManagementSystem.Controllers
 
             //if (ModelState.IsValid)
             //{
-                try
+            try
+            {
+
+                Room beforeRenovationRoom = await _context.rooms.FirstOrDefaultAsync(x => x.Id == id);
+                int alreadyOccupied = beforeRenovationRoom.capacity - beforeRenovationRoom.vacancy;
+                if (room.capacity >= alreadyOccupied)
                 {
+                    int newVacancy = beforeRenovationRoom.vacancy + (room.capacity - beforeRenovationRoom.capacity);
+                    room.vacancy = newVacancy;
+
+                    // we need to detach one of "beforeRenovationRoom" or "room".
+                    // because EF core can't track two instanses with same id
+                    // (here "beforeRenovationRoom" and "room" have same id). 
+                    _context.Entry(beforeRenovationRoom).State = EntityState.Detached;
+
                     _context.Update(room);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!RoomExists(room.Id))
+                    // give message on frontend that can't change capacity....
+                    // Provide a message to the frontend indicating that the capacity cannot be changed.
+                    string errorMessage = "Cannot change capacity. new capacity is less than current occupancy.";
+
+                    // You can return this message to the frontend or use it as needed.
+
+                    // For example, if you're in a controller action, you can return a response with the message:
+                    return BadRequest(errorMessage);
+
+                    // Or if you're working with an API, you can set an appropriate status code and return the message as JSON:
+                    return new JsonResult(new { ErrorMessage = errorMessage })
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        StatusCode = (int)HttpStatusCode.BadRequest
+                    };
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RoomExists(room.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
             //}
             return View(room);
         }
@@ -151,14 +183,14 @@ namespace HostelManagementSystem.Controllers
             {
                 _context.rooms.Remove(room);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoomExists(int id)
         {
-          return (_context.rooms?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.rooms?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         // GET: Rooms/Details/5
