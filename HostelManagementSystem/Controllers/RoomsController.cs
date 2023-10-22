@@ -139,7 +139,7 @@ namespace HostelManagementSystem.Controllers
                     //};
 
                     // ################################ Second Approach of errmsg on same page ##########################
-                    TempData["ErrorMessage"] = "Cannot change capacity. Current capacity is greater than occupancy.";
+                    TempData["ErrorMessage"] = "Cannot change capacity. New capacity is less than current occupancy of room.";
                     return View();
 
                 }
