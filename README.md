@@ -4,6 +4,14 @@
 
   Our System provide structured user interface & Services for hostel so they can easily manage students details in the system with rooms that is assigned to the student.We have implemented **Role Based authentication** using **Identity**.
 
+### Roles & Funcationality 
+
+#### Admin 
+
+#### Student 
+
+
+
 ### How to Run this project
 
 Clone this Repository

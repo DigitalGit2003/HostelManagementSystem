@@ -7,24 +7,24 @@
 <center>
 
 <h2>@ViewData["Title"]</h2>
-<hr/>
+<hr style="height : 2px; background-color : black" />
 </center>
 
 
 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
     <div class="row">
         <div class="col-md-6">
-          
+            
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Name" class="form-control" autocomplete="Name" aria-required="true" placeholder="Enter your name" />
+                <input asp-for="Input.Name" class="form-control border-dark border-1" autocomplete="Name" aria-required="true" placeholder="Enter your name" />
                 <label asp-for="Input.Name">Name</label>
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.Email" class="form-control border-dark border-1" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
@@ -33,25 +33,25 @@
 
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.Password" class="form-control border-dark border-1" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.Password">Password</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.ConfirmPassword" class="form-control border-dark border-1" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.dob" class="form-control" autocomplete="dob" aria-required="true" />
+                <input asp-for="Input.dob" class="form-control border-dark border-1" autocomplete="dob" aria-required="true" />
                 <label asp-for="Input.dob">Date Of Birth</label>
                 <span asp-validation-for="Input.dob" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Phone" class="form-control" autocomplete="Phone" aria-required="true" placeholder="Enter your phone" />
+                <input asp-for="Input.Phone" class="form-control border-dark border-1" autocomplete="Phone" aria-required="true" placeholder="Enter your phone" />
                 <label asp-for="Input.Phone">Phone</label>
                 <span asp-validation-for="Input.Phone" class="text-danger"></span>
             </div>
@@ -63,31 +63,31 @@
             
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Status" class="form-control" autocomplete="Status" aria-required="true" placeholder="Status" />
+                <input asp-for="Input.Status" class="form-control border-dark border-1" autocomplete="Status" aria-required="true" placeholder="Status" />
                 <label asp-for="Input.Status">Status</label>
                 <span asp-validation-for="Input.Status" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.City" class="form-control" autocomplete="City" aria-required="true" placeholder="Enter your city" />
+                <input asp-for="Input.City" class="form-control border-dark border-1" autocomplete="City" aria-required="true" placeholder="Enter your city" />
                 <label asp-for="Input.City">City</label>
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.State" class="form-control" autocomplete="State" aria-required="true" placeholder="Enter your state" />
+                <input asp-for="Input.State" class="form-control border-dark border-1" autocomplete="State" aria-required="true" placeholder="Enter your state" />
                 <label asp-for="Input.State">State</label>
                 <span asp-validation-for="Input.State" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.ZipCode" class="form-control" autocomplete="ZipCode" aria-required="true" placeholder="Enter your ZipCode" />
+                <input asp-for="Input.ZipCode" class="form-control border-dark border-1" autocomplete="ZipCode" aria-required="true" placeholder="Enter your ZipCode" />
                 <label asp-for="Input.ZipCode">ZipCode</label>
                 <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
             </div>
             
             <div class="form-floating mb-3">
-                <select asp-for="Input.room" asp-items="@Model.Input.roomList" class="form-select" aria-required="true" >
+                <select asp-for="Input.room" asp-items="@Model.Input.roomList" class="form-select border-dark border-1" aria-required="true">
                 <option disabled selected>Select Room</option>
                </select>
                 <span asp-validation-for="Input.room" class="text-danger"></span>
