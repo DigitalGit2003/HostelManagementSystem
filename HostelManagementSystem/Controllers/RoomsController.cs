@@ -116,23 +116,32 @@ namespace HostelManagementSystem.Controllers
 
                     _context.Update(room);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     // give message on frontend that can't change capacity....
-                    // Provide a message to the frontend indicating that the capacity cannot be changed.
-                    string errorMessage = "Cannot change capacity. new capacity is less than current occupancy.";
 
-                    // You can return this message to the frontend or use it as needed.
+                    // ################################# First Approach by changing page #################################
 
-                    // For example, if you're in a controller action, you can return a response with the message:
-                    return BadRequest(errorMessage);
+                    //// Provide a message to the frontend indicating that the capacity cannot be changed.
+                    //string errorMessage = "Cannot change capacity. new capacity is less than current occupancy.";
 
-                    // Or if you're working with an API, you can set an appropriate status code and return the message as JSON:
-                    return new JsonResult(new { ErrorMessage = errorMessage })
-                    {
-                        StatusCode = (int)HttpStatusCode.BadRequest
-                    };
+                    //// You can return this message to the frontend or use it as needed.
+
+                    //// For example, if you're in a controller action, you can return a response with the message:
+                    //return BadRequest(errorMessage);
+
+                    //// Or if you're working with an API, you can set an appropriate status code and return the message as JSON:
+                    //return new JsonResult(new { ErrorMessage = errorMessage })
+                    //{
+                    //    StatusCode = (int)HttpStatusCode.BadRequest
+                    //};
+
+                    // ################################ Second Approach of errmsg on same page ##########################
+                    TempData["ErrorMessage"] = "Cannot change capacity. Current capacity is greater than occupancy.";
+                    return View();
+
                 }
             }
             catch (DbUpdateConcurrencyException)
@@ -146,7 +155,6 @@ namespace HostelManagementSystem.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Index));
             //}
             return View(room);
         }
