@@ -6,13 +6,30 @@
 @{
 }
 
-<div class="card mx-3" style=" width: 18rem;">
-	<div class="card-body">
-        
-	</div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Name: <b>@Model.Name</b></li>
-        <li class="list-group-item">Email: <b>@Model.Email</b></li>
-        <li class="list-group-item">Phone: <b>@Model.Phone</li>
-    </ul>
-</div>
+@* <div class="card mx-3" style=" width: 18rem;"> *@
+@* 	<div class="card-body">
+
+	</div> *@
+
+
+<table class="table border-dark" style="border: 1px solid black;">
+	<tbody>
+	
+		<tr>
+			<th> Name : </th>
+			<td> @Model.Name</td>
+		</tr>
+		<tr>
+			<th>Email : </th>
+			<td>@Model.Email</td>
+		</tr>
+		<tr>
+			<th> Phone : </th>
+			<td>@Model.Phone</td>
+		</tr>
+
+	</tbody>
+</table>
+	
+
+@* </div> *@
