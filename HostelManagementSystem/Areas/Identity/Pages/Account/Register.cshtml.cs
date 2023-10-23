@@ -176,7 +176,7 @@ namespace HostelManagementSystem.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                Console.WriteLine("#######" + Input.Name);
+                //Console.WriteLine("#######" + Input.Name);
                 user.Name = Input.Name;
                 user.dob = Input.dob;
                 user.Phone = Input.Phone;
