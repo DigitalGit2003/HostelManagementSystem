@@ -77,7 +77,7 @@ update-database
 /graphs/contributors">
             <img src="https://github.com/DigitalGit2003.png" width="100px;" alt=""/>
             <br />
-            <sub><b>Gautam&nbspLathiya</b></sub>
+            <sub><b>Gautam_Lathiya</b></sub>
         </a>
         <br />
     </td>
@@ -86,7 +86,7 @@ update-database
 /graphs/contributors">
             <img src="https://github.com/Sandip-Kanzariya.png" width="100px;" alt=""/>
             <br />
-            <sub><b>Sandip&nbspKanzariya</b></sub>
+            <sub><b>Sandip_Kanzariya</b></sub>
         </a>
         <br />
     </td>
