@@ -69,7 +69,7 @@ update-database
 
 > Team members
 
-<center>
+
 <table>
   <tr>
     <td align="center">
@@ -92,4 +92,3 @@ update-database
     </td>
     </tr>
 </table>
-</center>
